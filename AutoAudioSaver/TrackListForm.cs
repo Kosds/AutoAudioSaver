@@ -36,12 +36,8 @@ namespace AutoAudioSaver
         }
         private void TrackListLoad(object sender, EventArgs e)
         {
-            if (!Settings.Default.Auth) //не запускается при Settings.Default.Auth = false
-                new AuthenticationForm().Show();
             Task.Factory.StartNew(() =>           
             {
-                while (!Settings.Default.Auth)
-                    Task.Delay(500);
                 try
                 {
                     trackList = GetTrackList();
@@ -160,7 +156,6 @@ namespace AutoAudioSaver
                     SaveButton.Enabled = true;
                 }));
         }
-
         private void ChangePath_Click(object sender, EventArgs e)
         {
             folderBrowserDialog.ShowDialog();
