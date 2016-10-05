@@ -117,13 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="path" xml:space="preserve">
-    <value>D:\saverTest\</value>
-  </data>
-  <data name="url" xml:space="preserve">
+  <data name="Url" xml:space="preserve">
     <value>https://oauth.vk.com/authorize?client_id=5579706&amp;scope=audio&amp;redirect_uri=https://oauth.vk.com/authorize&amp;display=popup&amp;v=5.53&amp;response_type=token</value>
   </data>
-  <data name="xmlTrackListName" xml:space="preserve">
+  <data name="XmlTrackListName" xml:space="preserve">
     <value>SavedTrackList.xml</value>
   </data>
 </root>

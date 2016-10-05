@@ -61,29 +61,20 @@ namespace AutoAudioSaver.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to D:\saverTest\.
-        /// </summary>
-        internal static string path {
-            get {
-                return ResourceManager.GetString("path", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to https://oauth.vk.com/authorize?client_id=5579706&amp;scope=audio&amp;redirect_uri=https://oauth.vk.com/authorize&amp;display=popup&amp;v=5.53&amp;response_type=token.
         /// </summary>
-        internal static string url {
+        internal static string Url {
             get {
-                return ResourceManager.GetString("url", resourceCulture);
+                return ResourceManager.GetString("Url", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to SavedTrackList.xml.
         /// </summary>
-        internal static string xmlTrackListName {
+        internal static string XmlTrackListName {
             get {
-                return ResourceManager.GetString("xmlTrackListName", resourceCulture);
+                return ResourceManager.GetString("XmlTrackListName", resourceCulture);
             }
         }
     }

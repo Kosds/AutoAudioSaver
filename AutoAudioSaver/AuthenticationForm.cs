@@ -20,7 +20,7 @@ namespace AutoAudioSaver
 
         private void AuthenticationFormLoad(object sender, EventArgs e)
         {
-            AuthenticationBrowser.Navigate(Resources.url);
+            AuthenticationBrowser.Navigate(Resources.Url);
         }
         private void LoadingCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
