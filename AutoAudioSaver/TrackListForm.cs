@@ -164,6 +164,7 @@ namespace AutoAudioSaver
         private void ChangePath_Click(object sender, EventArgs e)
         {
             folderBrowserDialog.ShowDialog();
+            folderBrowserDialog.SelectedPath += @"\";
             DownloadingPath.Text = folderBrowserDialog.SelectedPath;
             Settings.Default.DownloadingPath = folderBrowserDialog.SelectedPath;
             Settings.Default.Save();
