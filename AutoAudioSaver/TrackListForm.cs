@@ -32,17 +32,17 @@ namespace AutoAudioSaver
             downloader = new WebClient();
             downloader.DownloadProgressChanged += (_, b) => progressBar.Value = b.ProgressPercentage; 
             downloader.DownloadFileCompleted += (_,__) => progressBar.Value = 0;
-            SaveButton.Enabled = Settings.Default.trackListWasSaved;
-            folderBrowserDialog.SelectedPath = Settings.Default.downloadingPath;
+            SaveButton.Enabled = Settings.Default.TrackListWasSaved;
+            folderBrowserDialog.SelectedPath = Settings.Default.DownloadingPath;
             DownloadingPath.Text = folderBrowserDialog.SelectedPath;
         }
         private void TrackListLoad(object sender, EventArgs e)
         {
-            if (!Settings.Default.auth)
+            if (!Settings.Default.Auth)
                 new AuthenticationForm().Show();
             Task.Factory.StartNew(() =>           
             {
-                while (!Settings.Default.auth)
+                while (!Settings.Default.Auth)
                     Task.Delay(500);
                 try
                 {
@@ -60,9 +60,9 @@ namespace AutoAudioSaver
         private List<Audio> GetTrackList()
         {
             WebRequest request = WebRequest.Create("https://api.vk.com/method/audio.get?owner_id=" +
-                                                    Settings.Default.id +
+                                                    Settings.Default.Id +
                                                     "need_user=0&count=200&access_token=" +
-                                                    Settings.Default.token);
+                                                    Settings.Default.Token);
             string result;
             using (var response = request.GetResponse())
             using (var reader = new StreamReader(response.GetResponseStream()))
@@ -94,7 +94,7 @@ namespace AutoAudioSaver
         }
         private void SaveTrack(Audio track)
         {
-            var fileName = Settings.Default.downloadingPath + DeleteInvalidChars(track.artist + " - " + track.title + ".mp3");            
+            var fileName = Settings.Default.DownloadingPath + DeleteInvalidChars(track.artist + " - " + track.title + ".mp3");            
             try
             {
                 downloader.DownloadFileAsync(new Uri(track.url), fileName);
@@ -124,7 +124,7 @@ namespace AutoAudioSaver
             {
                 new XmlSerializer(typeof(List<Audio>)).Serialize(writer, trackList);
             }
-            Settings.Default.trackListWasSaved = true;
+            Settings.Default.TrackListWasSaved = true;
             Settings.Default.Save();
         }
         private List<Audio> DeserializeTrackList()
@@ -143,7 +143,7 @@ namespace AutoAudioSaver
             foreach (var track in tracks)
             {
                 SaveButton.Invoke(new Action(() => SaveButton.Text = "Осталось: " + tracksLeft--));
-                var fileName = Settings.Default.downloadingPath + DeleteInvalidChars(track.artist + " - " + track.title + ".mp3");
+                var fileName = Settings.Default.DownloadingPath + DeleteInvalidChars(track.artist + " - " + track.title + ".mp3");
                 multipleDownloader.DownloadFileAsync(new Uri(track.url), fileName);
                 handle.WaitOne();
             }
@@ -158,7 +158,7 @@ namespace AutoAudioSaver
         {
             folderBrowserDialog.ShowDialog();
             DownloadingPath.Text = folderBrowserDialog.SelectedPath;
-            Settings.Default.downloadingPath = folderBrowserDialog.SelectedPath;
+            Settings.Default.DownloadingPath = folderBrowserDialog.SelectedPath;
         }
     }
 }

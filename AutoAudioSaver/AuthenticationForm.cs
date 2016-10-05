@@ -39,9 +39,9 @@ namespace AutoAudioSaver
             string url = AuthenticationBrowser.Url.ToString();
             if (url.Contains("#"))
             {
-                Settings.Default.token = url.Split('#')[1].Split('&')[0].Split('=')[1];
-                Settings.Default.id = url.Split('#')[1].Split('&')[2].Split('=')[1];
-                Settings.Default.auth = true;
+                Settings.Default.Token = url.Split('#')[1].Split('&')[0].Split('=')[1];
+                Settings.Default.Id = url.Split('#')[1].Split('&')[2].Split('=')[1];
+                Settings.Default.Auth = true;
                 Settings.Default.Save();
             }
             else throw new FormatException("Ошибка при загрузке");

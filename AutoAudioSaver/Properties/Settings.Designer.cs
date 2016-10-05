@@ -26,60 +26,60 @@ namespace AutoAudioSaver.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool auth {
+        public bool Auth {
             get {
-                return ((bool)(this["auth"]));
+                return ((bool)(this["Auth"]));
             }
             set {
-                this["auth"] = value;
+                this["Auth"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string id {
+        public string Id {
             get {
-                return ((string)(this["id"]));
+                return ((string)(this["Id"]));
             }
             set {
-                this["id"] = value;
+                this["Id"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string token {
+        public string Token {
             get {
-                return ((string)(this["token"]));
+                return ((string)(this["Token"]));
             }
             set {
-                this["token"] = value;
+                this["Token"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool trackListWasSaved {
+        public bool TrackListWasSaved {
             get {
-                return ((bool)(this["trackListWasSaved"]));
+                return ((bool)(this["TrackListWasSaved"]));
             }
             set {
-                this["trackListWasSaved"] = value;
+                this["TrackListWasSaved"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string downloadingPath {
+        public string DownloadingPath {
             get {
-                return ((string)(this["downloadingPath"]));
+                return ((string)(this["DownloadingPath"]));
             }
             set {
-                this["downloadingPath"] = value;
+                this["DownloadingPath"] = value;
             }
         }
     }
