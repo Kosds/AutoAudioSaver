@@ -70,5 +70,17 @@ namespace AutoAudioSaver.Properties {
                 this["trackListWasSaved"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string downloadingPath {
+            get {
+                return ((string)(this["downloadingPath"]));
+            }
+            set {
+                this["downloadingPath"] = value;
+            }
+        }
     }
 }
