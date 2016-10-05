@@ -29,16 +29,14 @@ namespace AutoAudioSaver
         public TrackListForm()
         {
             InitializeComponent();
-            downloader = new WebClient();
-            downloader.DownloadProgressChanged += (_, b) => progressBar.Value = b.ProgressPercentage; 
-            downloader.DownloadFileCompleted += (_,__) => progressBar.Value = 0;
             SaveButton.Enabled = Settings.Default.TrackListWasSaved;
             folderBrowserDialog.SelectedPath = Settings.Default.DownloadingPath;
             DownloadingPath.Text = folderBrowserDialog.SelectedPath;
+            if (!Settings.Default.TrackListWasSaved) this.FormClosed += (_, __) => SerializeTrackList();
         }
         private void TrackListLoad(object sender, EventArgs e)
         {
-            if (!Settings.Default.Auth)
+            if (!Settings.Default.Auth) //не запускается при Settings.Default.Auth = false
                 new AuthenticationForm().Show();
             Task.Factory.StartNew(() =>           
             {
@@ -94,6 +92,12 @@ namespace AutoAudioSaver
         }
         private void SaveTrack(Audio track)
         {
+            if (downloader == null)
+            {
+                downloader = new WebClient();
+                downloader.DownloadProgressChanged += (_, b) => progressBar.Value = b.ProgressPercentage;
+                downloader.DownloadFileCompleted += (_, __) => progressBar.Value = 0;
+            }
             var fileName = Settings.Default.DownloadingPath + DeleteInvalidChars(track.artist + " - " + track.title + ".mp3");            
             try
             {
@@ -124,8 +128,11 @@ namespace AutoAudioSaver
             {
                 new XmlSerializer(typeof(List<Audio>)).Serialize(writer, trackList);
             }
-            Settings.Default.TrackListWasSaved = true;
-            Settings.Default.Save();
+            if (!Settings.Default.TrackListWasSaved)
+            {
+                Settings.Default.TrackListWasSaved = true;
+                Settings.Default.Save();
+            }
         }
         private List<Audio> DeserializeTrackList()
         {
@@ -159,6 +166,7 @@ namespace AutoAudioSaver
             folderBrowserDialog.ShowDialog();
             DownloadingPath.Text = folderBrowserDialog.SelectedPath;
             Settings.Default.DownloadingPath = folderBrowserDialog.SelectedPath;
+            Settings.Default.Save();
         }
     }
 }
