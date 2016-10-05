@@ -32,7 +32,10 @@ namespace AutoAudioSaver
             catch (FormatException exc)
             {
                 MessageBox.Show(exc.Message);
+                this.Close();
+                Environment.Exit(0);
             }
+            new TrackListForm().Show();
         }
         private void SetAuthenticationData()
         {
