@@ -64,7 +64,7 @@
             // 
             // folderBrowserDialog
             // 
-            this.folderBrowserDialog.RootFolder = System.Environment.SpecialFolder.Recent;
+            this.folderBrowserDialog.RootFolder = System.Environment.SpecialFolder.MyComputer;
             // 
             // DownloadingPath
             // 
