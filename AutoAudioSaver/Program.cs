@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AutoAudioSaver.Properties;
 
 namespace AutoAudioSaver
 {
@@ -16,7 +17,8 @@ namespace AutoAudioSaver
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TrackListForm());
+            if(Settings.Default.Auth) Application.Run(new TrackListForm());
+            else Application.Run(new AuthenticationForm());
         }
     }
 }
