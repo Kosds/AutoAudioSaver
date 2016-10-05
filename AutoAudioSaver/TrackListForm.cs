@@ -33,6 +33,8 @@ namespace AutoAudioSaver
             downloader.DownloadProgressChanged += (_, b) => progressBar.Value = b.ProgressPercentage; 
             downloader.DownloadFileCompleted += (_,__) => progressBar.Value = 0;
             SaveButton.Enabled = Settings.Default.trackListWasSaved;
+            folderBrowserDialog.SelectedPath = Settings.Default.downloadingPath;
+            DownloadingPath.Text = folderBrowserDialog.SelectedPath;
         }
         private void TrackListLoad(object sender, EventArgs e)
         {
@@ -92,7 +94,7 @@ namespace AutoAudioSaver
         }
         private void SaveTrack(Audio track)
         {
-            var fileName = Resources.path + DeleteInvalidChars(track.artist + " - " + track.title + ".mp3");            
+            var fileName = Settings.Default.downloadingPath + DeleteInvalidChars(track.artist + " - " + track.title + ".mp3");            
             try
             {
                 downloader.DownloadFileAsync(new Uri(track.url), fileName);
@@ -118,7 +120,7 @@ namespace AutoAudioSaver
         }
         private void SerializeTrackList()
         {
-            using (var writer = XmlWriter.Create(Resources.xmlTrackListName, GetWriteSettings()))
+            using (var writer = XmlWriter.Create(Resources.XmlTrackListName, GetWriteSettings()))
             {
                 new XmlSerializer(typeof(List<Audio>)).Serialize(writer, trackList);
             }
@@ -127,7 +129,7 @@ namespace AutoAudioSaver
         }
         private List<Audio> DeserializeTrackList()
         {
-            using (var stream = new FileStream(Resources.xmlTrackListName, FileMode.Open))
+            using (var stream = new FileStream(Resources.XmlTrackListName, FileMode.Open))
             {
                 return (List<Audio>)(new XmlSerializer(typeof(List<Audio>)).Deserialize(stream));
             }
@@ -141,7 +143,7 @@ namespace AutoAudioSaver
             foreach (var track in tracks)
             {
                 SaveButton.Invoke(new Action(() => SaveButton.Text = "Осталось: " + tracksLeft--));
-                var fileName = Resources.path + DeleteInvalidChars(track.artist + " - " + track.title + ".mp3");
+                var fileName = Settings.Default.downloadingPath + DeleteInvalidChars(track.artist + " - " + track.title + ".mp3");
                 multipleDownloader.DownloadFileAsync(new Uri(track.url), fileName);
                 handle.WaitOne();
             }
@@ -150,6 +152,13 @@ namespace AutoAudioSaver
                     SaveButton.Text = "Скачать новые";
                     SaveButton.Enabled = true;
                 }));
+        }
+
+        private void ChangePath_Click(object sender, EventArgs e)
+        {
+            folderBrowserDialog.ShowDialog();
+            DownloadingPath.Text = folderBrowserDialog.SelectedPath;
+            Settings.Default.downloadingPath = folderBrowserDialog.SelectedPath;
         }
     }
 }
